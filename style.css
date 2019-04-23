@@ -1,0 +1,191 @@
+
+body{
+  background-color: #eee;
+}
+.field{
+  color: #0080ff;
+}
+#inputpara, #inputpara2{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  display: inline-block;
+  border: .5px solid  #FFC107;
+  box-sizing: border-box;
+}
+
+button{
+  background-color:#0080ff;
+  color: white;
+  padding: 10px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #FFC107;
+}
+.cancel {
+  width: auto;
+  padding: 10px 18px;
+  background-color: gray;
+}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+img.adminReporter {
+  width: 20%;
+  border-radius: 50%;
+}
+.formcontainer {
+  padding: 16px;
+}
+.modalForm{
+  display:none;
+  position: fixed; 
+  z-index: 1; 
+  width: 100%; 
+  height: 100%; 
+  overflow: auto;
+  padding-top: 60px;
+}
+
+.form-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; 
+  border: 2px solid #FFC107;
+  width: 60%; 
+}
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: gray;
+  font-size: 40px;
+}
+.close:hover {
+  color:#FFC107;
+}
+
+.container{
+  width: 500px;
+  height: 300px;
+  margin:25vh auto;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px 0px rgba(0,0,0,0.3)
+}
+
+.header {
+  height: 20%;
+  background-color: #0080ff;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  text-align: center;
+  position:relative;
+}
+.backbtn , .removebtn {
+  background-color:#0080ff;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px ;
+  border: none;
+  cursor: pointer;
+}
+.backbtn:hover{
+  background-color:#FFC107;
+}
+
+#temp, #humidity-div {
+  font-family: "Courier New";
+  font-weight: bold;
+  font-size: 60px;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.city-icon-holder {
+  position:absolute;
+  left: 25%;
+  top: 40%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#city-name {
+  font-family: "Courier New";
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+}
+
+#icon {
+  width:50%;
+}
+
+#main{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.city-icon {
+  height: 80%;
+  width: 50%;
+  border-bottom-left-radius: 25px;
+  background-color: #FFC107;
+}
+
+.temperature {
+  position: absolute;
+  left: 50%;
+  top:0%;
+  height: 40%;
+  width: 50%;
+  background-color: #808080;
+}
+
+.humidity {
+  height: 40%;
+  width: 50%;
+  position:absolute;
+  left:50%;
+  top:40%;
+  border-bottom-right-radius: 25px;
+  background-color: #00bfff;
+}
+
+#search-btn {
+  width: 40px;
+  height:40px;
+  color: #eee;
+}
+
+#search-txt {
+  color: black;
+  height:30px;
+  border-radius: 10px;
+  border-style:none;
+  outline:none;
+  padding-right:1px;
+  padding-left:1px;
+  text-align:center;
+}
+
+.search {
+  position: absolute;
+  left: 50%;
+  top:50%;
+  -webkit-transform:translate(-50%,-50%);
+          transform:translate(-50%,-50%);
+}
+
+

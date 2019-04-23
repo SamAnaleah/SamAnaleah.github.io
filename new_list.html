@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  
+      <link rel="stylesheet" href="style.css">
+ <style>
+ #edits{
+ color: #0080ff;
+ text-align: center;
+ }
+ body {
+  background-image: url("a.jpg");
+  background-repeat: repeat-y;
+  background-size: 100% 100%;
+  height: 800px;
+ 
+  }
+  h2{
+      text-align:center;
+  }
+  .options{
+      list-style-type: none;
+      text-align:center;
+      font-variant: small-caps;
+  }
+  li{
+      padding: 15px 45px;
+      margin-bottom: 6px;
+
+  }
+  li:hover{
+      background-color:  #FFC107;
+  }
+  a:link{
+      text-decoration:none;
+      color:black;
+  }
+  a:active {
+      color: gray;
+  }
+
+  .accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+.breakingNews{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>
+</head>
+
+  <script type="text/javascript">
+	  var i=0;
+	  var array=[i];
+	  function populate(val){
+	    if (val == "Local" || val=="International"){
+	      array[i]=val;
+	      document.getElementById("Local").innerHTML="<li>Politics</li>";
+	      document.getElementById("International").innerHTML="<li>Sports</li>";
+	      document.getElementById("Local").id="Politics";
+	      document.getElementById("International").id="Sports";
+	      i++;
+	    }
+	    else 
+	      if (array.length == 1){
+	        array[i]=val;
+	        document.getElementById("Politics").innerHTML="<li>Economy</li>";
+	        document.getElementById("Sports").innerHTML="<li>Entertainment</li>";
+	        document.getElementById("Politics").id="Economy";
+	        document.getElementById("Sports").id="Entertainment";
+	        i++;
+	      }
+	    else 
+	      if (array.length == 2){
+	        array[i]=val;
+	        document.getElementById("Economy").innerHTML="<li>Health</li>";
+        	document.getElementById("Entertainment").innerHTML="<li>Education</li>";
+        	document.getElementById("Economy").id="Health";
+        	document.getElementById("Entertainment").id="Education";
+        	i++;
+      	}
+	    else 
+	      if(array.length ==3){
+	        array[i]=val;
+	        display();
+	      }
+      }
+      function delTrump(){
+        $.ajax({
+          url:'https://newsapi.org/v2/top-headlines?q=trump&apiKey=f6948f553bf04016972e098567dd74a9',
+          type:'DELETE',
+          success: function(result){
+            console.log(result)
+          }
+        });
+      
+    }
+
+	  function display(){
+	    var a=array[0];
+	    var b=array[1];
+	    var c=array[2];
+	    var d=array[3];
+	    var url = 'https://newsapi.org/v2/top-headlines?' + 'q=a&' + 'q=b&' + 'q=c&' + 'q=d&' + 'apiKey=f6948f553bf04016972e098567dd74a9';
+      var req = new Request(url);
+      var requestedNews;
+      var news="";
+      var count=0;
+      var goback;
+      var remove;
+      fetch(req)
+      .then(function(response) {
+        return response.json();
+        })
+       .then(function(myJson) {
+        console.log(JSON.stringify(myJson));
+        requestedNews=myJson["articles"];
+        for (var key in requestedNews) {
+          news+="<a href='"+"#demo"+count+"' class='btn btn-info' data-toggle='collapse'>"+
+          JSON.stringify(requestedNews[key]['title'])+
+          "</a><div id='"+"demo"+count+"' class='collapse'>"+
+          JSON.stringify(requestedNews[key]['author'])+"</br>"+
+          JSON.stringify(requestedNews[key]['description'])+"<br>"+
+          "<a href="+JSON.stringify(requestedNews[key]['url'])+">GO TO ARTICLE</a></br></div></br>";
+          count=count+1;
+          }
+        document.getElementById('printHere').innerHTML=news;
+        goback="<input type='button' value='GO BACK' onClick='location.href=location.href' class='backbtn'>"
+        document.getElementById('goback').innerHTML=goback;
+        remove="<input type='button' value='REMOVE' onClick='delTrump()' class='removebtn'>"
+        document.getElementById('remove').innerHTML=remove;
+        });
+      }
+      function validateUser(){
+        var username="admin";
+        var psd="admin123";
+        if(document.getElementById("inputpara").value == username && document.getElementById("inputpara2").value == psd){
+          return true;
+        }
+        else{
+          alert("Username or password is incorrect! ")
+        return false;
+        }
+      }
+      
+
+</script>
+
+<body>
+    <button onclick="document.getElementById('admin').style.display='block'" style="width:auto; float:right" >SIGN IN</button>
+  <div class="modalForm" id="admin">
+        
+  <form class="form-content" action="userHome.html" onsubmit="return validateUser()">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('admin').style.display='none'" class="close" title="Close Form">&times;</span>
+      <img src="newsreporter.gif" alt="adminReporter" class="adminReporter">
+      </div>
+      <div class="formcontainer">
+          <label for="uname" class="field"><b>Username</b></label>
+          <input type="text" id="name" placeholder=" Enter Username" name="uname" required id="inputpara">
+    
+          <label for="pwrd" class="field"><b>Password</b></label>
+          <input type="password" id="pin"  placeholder="Enter Password" name="pwrd" required id="inputpara">
+            
+          <button type="button" onclick="login()" >Login</button>
+        </div>
+        <div class="formcontainer" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('admin').style.display='none'" class="cancel">Cancel</button>
+          </div>
+        </form>
+  </div>
+  <br/>
+  <h2 id="edits">Search for News that Interest You</h2> <hr />
+	  <img src="logo.gif" alt="Breaking News" style="width:200px;height:200px;" class="breakingNews">
+		
+  <div class="list">
+    <ul class="options">
+      <a id="Local" onclick="populate(this.id)"><li>Local</li></a>
+      <a  id="International" onclick="populate(this.id)"><li>International</li></a>
+      <a href="https://sleepy-gorge-71855.herokuapp.com/"><li>Your Thoughts</li></a>
+    </ul>
+  </div>
+
+  <center><div id="printHere"></div></center>
+  <br/>
+  <div id="goback"></div>
+  <div id="remove"></div>
+
+	<hr/>
+   <h2 id="edits">Weather</h2>
+		 
+		 
+  <div class="container">
+    <header class="header">
+      <div class="search">
+        <input type="text" placeholder="Enter City Name" id="search-txt">
+        <a id="search-btn" href="#"><i class="fas fa-search"></i></a>
+      </div>
+    </header>
+
+    <main id="main">
+  
+    <div class="city-icon">
+      <div class="city-icon-holder">
+        <div id="city-name"></div>
+        <img src="" alt="" id="icon">
+      </div>
+    </div>
+    
+    <div class="temperature">
+      <div id="temp"></div>
+    </div>
+    
+    <div class="humidity">
+      <div id="humidity-div"></div>
+    </div>
+    
+    </main>
+  
+  </div>
+
+
+  
+  <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+  <script  src="index.js"></script>
+  <script  src="login.js"></script>
+  <script>
+    var modal = document.getElementById('admin');
+    window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+    }
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+      
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+    
+  </script>
+</body>
+</html>

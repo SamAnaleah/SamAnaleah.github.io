@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+ <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+         <script>
+            function submitNewArticle() {
+              const Url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=apiKey=f6948f553bf04016972e098567dd74a9';
+              a_author= document.getElementById('aAuthor').value;
+              a_title= document.getElementById('aTitle').value;
+              a_description= document.getElementById(aDescription).value;
+              $(document).ready(function () {
+                $('#btn').click(function(){
+                  $.post(Url,{ myData: a_author,a_title,a_description }, 
+                  function(data, status, jqXHR) {
+                    $('p').append('status: ' + status + ', data: ' + data);
+                  });
+                });
+              });
+              alert("Complete");
+              }
+            function appendArticle(){
+              $.ajax({
+                type: 'PUT',
+                url: 'https://newsapi.org/v2/top-headlines?country=us&apiKey=apiKey=f6948f553bf04016972e098567dd74a9',
+                data: { title: 'Something different' }
+              });
+              alert("Complete");
+            }
+  </script>
+  </head>
+  <style>
+
+      body {
+        background-image: url("a.jpg");
+        background-repeat: repeat-y;
+        background-size: 100% 100%;
+        height: 800px;
+      }
+      #edits{
+        color: #0080ff;
+        text-align: center;
+    }
+    
+  
+  </style>
+ 
+  <body>
+    <form style="width:auto; float:right" action="new_list.html">
+        <button type="submit">Signout</button>
+    </form>
+    <br/>
+    <h2 id="edits">Add your own Headline</h2> <hr/>
+    <div id="putNew">
+        <form style="width:auto; float:left; padding:30px;" onsubmit="return submitNewArticle()" > 
+            Title:<br/> <input type="text" name="title" id=aTitle><br>
+            Author:<br/> <input type="text" name="author" id="aAuthor" ><br>
+            Description:<br/> <input type="text" name="description" id="aDescription"><br>
+            <button type="submit" width="20%" id="btn">Submit</button>
+          </form>
+         
+    </div>
+    <br/>
+    <div id= "done"></div>
+    <br/>
+   
+ 
+    <div>
+            <form style="width:auto; float:left;padding:30px" onsubmit="return appendArticle()">
+                    <button type="submit" >Append</button>
+                </form>
+    </div>   
+
+  </body>
+  </html>
